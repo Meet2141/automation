@@ -1,0 +1,57 @@
+name: android
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_apk:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '15'
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.8'
+          channel: 'stable'
+      - name: Install Android Gems
+        working-directory: ${{ github.workspace }}/android
+        run: bundle install
+
+      - name: Flutter get
+        working-directory: ${{ github.workspace }}
+        run: flutter pub get
+
+      - name: Decode Keystore
+        run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > ${{ github.workspace }}/android/automation.jks
+
+      - name: Set up key.properties
+        working-directory: ${{ github.workspace }}
+        run: |
+          echo keyPassword=\${{ secrets.SIGNING_STORE_PASSWORD }} > ${{env.PROPERTIES_PATH}}
+          echo storePassword=\${{ secrets.SIGNING_KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
+          echo keyAlias=\${{ secrets.SIGNING_KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
+        env:
+          PROPERTIES_PATH: "${{ github.workspace }}/android/key.properties"
+
+      - name: Build APK
+        working-directory: ${{ github.workspace }}
+        run: flutter build apk
+
+      - name: Create Firebase Service Credentials file
+        run: |
+          echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
+          base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}/android/firebase_credentials.json"
+        env:
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+
+      - name: Distribute Android Beta App
+        working-directory: ${{ github.workspace }}/android
+        run: bundle exec fastlane android gitaction_cicd
+        env:
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}

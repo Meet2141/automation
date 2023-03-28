@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -30,12 +32,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  PackageInfo? packageInfo;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  package() async {
+    packageInfo = await PackageInfo.fromPlatform();
+  }
+
+  @override
+  void initState() {
+    package();
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -44,25 +51,55 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              titleText(title: 'Build: '),
+              valueText(value: '${packageInfo?.buildNumber}'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              titleText(title: 'Version: '),
+              valueText(value: '${packageInfo?.version}'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              titleText(title: 'App Name: '),
+              valueText(value: '${packageInfo?.appName}'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              titleText(title: 'Package: '),
+              valueText(value: '${packageInfo?.packageName}'),
+            ],
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget titleText({required String title}) {
+    return Text(
+      title,
+      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.grey.withOpacity(0.8)),
+    );
+  }
+
+  Widget valueText({required String value}) {
+    return Text(
+      value,
+      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
     );
   }
 }

@@ -1,0 +1,15 @@
+default_platform(:android)
+
+platform :android do
+  desc "GitAction CI/CD ANDROID Auto Mation"
+  lane :gitaction_cicd do
+      firebase_app_distribution(
+          app: ENV["FIREBASE_APP_ID_ANDROID"],
+          testers: "shahmeet2141@gmail.com",
+          release_notes: "GitAction CI/CD ANDROID Auto Mation Release",
+          android_artifact_type: "APK",
+          android_artifact_path: "../build/app/outputs/apk/release/app-release.apk",
+          service_credentials_file: "firebase_credentials.json"
+      )
+  end
+end
