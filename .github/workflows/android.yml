@@ -52,6 +52,6 @@ jobs:
 
       - name: Distribute Android Beta App
         working-directory: ${{ github.workspace }}/android
-        run: bundle exec fastlane android gitaction_cicd
+        run: bundle exec fastlane android automation
         env:
           FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}

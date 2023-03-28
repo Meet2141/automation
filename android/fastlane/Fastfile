@@ -2,7 +2,7 @@ default_platform(:android)
 
 platform :android do
   desc "GitAction CI/CD ANDROID Auto Mation"
-  lane :gitaction_cicd do
+  lane :automation do
       firebase_app_distribution(
           app: ENV["FIREBASE_APP_ID_ANDROID"],
           testers: "shahmeet2141@gmail.com",
