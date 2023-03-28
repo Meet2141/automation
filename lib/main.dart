@@ -17,15 +17,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.brown,
       ),
-      home: const MyHomePage(title: 'Automation by Meet Shah'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -36,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> package() async {
     packageInfo = await PackageInfo.fromPlatform();
+    setState(() {});
   }
 
   @override
@@ -49,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.title),
+        title: const Text('Automation'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -81,6 +80,14 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               titleText(title: 'Package: '),
               valueText(value: packageInfo?.packageName ?? '-'),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              titleText(title: 'Designed by '),
+              valueText(value: 'Meet Shah'),
             ],
           ),
         ],
