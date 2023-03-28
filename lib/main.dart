@@ -34,14 +34,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   PackageInfo? packageInfo;
 
-  package() async {
+  Future<void> package() async {
     packageInfo = await PackageInfo.fromPlatform();
   }
 
   @override
   void initState() {
     package();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -49,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Column(
@@ -59,28 +59,28 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               titleText(title: 'Build: '),
-              valueText(value: '${packageInfo?.buildNumber}'),
+              valueText(value: packageInfo?.buildNumber ?? '-'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               titleText(title: 'Version: '),
-              valueText(value: '${packageInfo?.version}'),
+              valueText(value: packageInfo?.version ?? '-'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               titleText(title: 'App Name: '),
-              valueText(value: '${packageInfo?.appName}'),
+              valueText(value: packageInfo?.appName ?? '-'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               titleText(title: 'Package: '),
-              valueText(value: '${packageInfo?.packageName}'),
+              valueText(value: packageInfo?.packageName ?? '-'),
             ],
           ),
         ],
