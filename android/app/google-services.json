@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "715223027981",
+    "project_id": "automation-f66fe",
+    "storage_bucket": "automation-f66fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715223027981:android:939ab2c7afd19f56466044",
+        "android_client_info": {
+          "package_name": "com.cicd.automation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715223027981-rkettonlvr9p5s9tnkd63jsd8hlak8t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQDB2BihaCybNgOvgkrhV12fz7g-WOAos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715223027981-rkettonlvr9p5s9tnkd63jsd8hlak8t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
