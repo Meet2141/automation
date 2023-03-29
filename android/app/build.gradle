@@ -62,8 +62,8 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-//            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storeFile rootProject.file('automation.jks')
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+//            storeFile rootProject.file('automation.jks')
             storePassword keystoreProperties['storePassword']
         }
     }
