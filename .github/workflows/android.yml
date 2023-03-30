@@ -2,7 +2,7 @@ name: android
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   build_apk:
