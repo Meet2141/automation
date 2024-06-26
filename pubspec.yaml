@@ -1,27 +1,26 @@
 name: automation
 description: A new Flutter project.
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
-version: 1.0.0+11
+version: 1.0.1+12
 
 environment:
-  sdk: '>=2.19.5 <3.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.5
-  package_info_plus: ^3.0.3
+  cupertino_icons: ^1.0.8
+  package_info_plus: ^8.0.0
+  flutter_bloc: ^8.1.6
+  go_router: ^14.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.1
+  flutter_lints: ^4.0.0
 
 flutter:
-
   uses-material-design: true

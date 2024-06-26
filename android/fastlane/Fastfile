@@ -1,7 +1,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "GitAction CI/CD ANDROID Auto Mation"
+  desc "GitAction CI/CD ANDROID"
   lane :automation do
       firebase_app_distribution(
           app: ENV["FIREBASE_APP_ID_ANDROID"],

@@ -1,5 +1,5 @@
+import 'package:automation/routing/routing_config.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,102 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Automation',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.brown,
+        appBarTheme: const AppBarTheme(color: Colors.brown),
       ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  PackageInfo? packageInfo;
-
-  Future<void> package() async {
-    packageInfo = await PackageInfo.fromPlatform();
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    package();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Automation'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              titleText(title: 'Build: '),
-              valueText(value: packageInfo?.buildNumber ?? '-'),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              titleText(title: 'Version: '),
-              valueText(value: packageInfo?.version ?? '-'),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              titleText(title: 'App Name: '),
-              valueText(value: packageInfo?.appName ?? '-'),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              titleText(title: 'Package: '),
-              valueText(value: packageInfo?.packageName ?? '-'),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              titleText(title: 'Designed by '),
-              valueText(value: 'Meet Shah'),
-            ],
-          ),
-        ],
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-
-  Widget titleText({required String title}) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.grey.withOpacity(0.8)),
-    );
-  }
-
-  Widget valueText({required String value}) {
-    return Text(
-      value,
-      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+      routerConfig: RoutingConfig.router,
     );
   }
 }
