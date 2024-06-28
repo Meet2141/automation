@@ -1,6 +1,7 @@
 import 'package:automation/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 
+///HomeScreen - Display Home Screen
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
